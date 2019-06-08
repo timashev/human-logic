@@ -1,0 +1,10 @@
+language : node_js
+cache: yarn
+node_js :
+  - stable
+install:
+  - yarn
+script:
+  - yarn all
+after_script:
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js

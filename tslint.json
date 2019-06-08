@@ -1,0 +1,10 @@
+{
+  "extends": ["tslint:recommended"],
+  "rules": {
+    "ordered-imports": false,
+    "max-line-length": [true, 110],
+    "quotemark": [true, "single"],
+    "indent": [true, "spaces"],
+    "trailing-comma": [true, {"multiline": "never", "singleline": "never"}]
+  }
+}
