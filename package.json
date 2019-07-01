@@ -1,6 +1,6 @@
 {
   "name": "human-logic",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Human Logic",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,8 +13,8 @@
     "test:watch": "npx jest --watch",
     "lint": "npx eslint -c .eslintrc.js --ext .ts src",
     "build": "npx tsc -p tsconfig-dist.json",
-    "prepublishOnly" : "yarn lint && yarn test",
-    "prepare" : "yarn build"
+    "prepublishOnly": "yarn lint && yarn test",
+    "prepare": "yarn build"
   },
   "repository": {
     "type": "git",
