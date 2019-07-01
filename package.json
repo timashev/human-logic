@@ -59,5 +59,8 @@
     "jest": "^24.8.0",
     "prettier": "^1.18.2",
     "typescript": "^3.5.2"
+  },
+  "dependencies": {
+    "tslib": "^1.10.0"
   }
 }
