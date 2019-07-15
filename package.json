@@ -1,6 +1,6 @@
 {
   "name": "human-logic",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Human Logic",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
