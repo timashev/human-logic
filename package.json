@@ -1,6 +1,6 @@
 {
   "name": "human-logic",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Human Logic",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,12 +13,13 @@
     "test:watch": "npx jest --watch",
     "lint": "npx eslint -c .eslintrc.js --ext .ts src",
     "build": "npx tsc -p tsconfig-dist.json",
+    "docs": "typedoc --sourcefile-url-map typedoc-sourcefile-map.json src",
     "prepublishOnly": "yarn lint && yarn test",
     "prepare": "yarn build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/timashev/human-logic.git"
+    "url": "git+https://github.com/timashev/human-logic.git"
   },
   "keywords": [
     "logic",
@@ -41,24 +42,27 @@
     "node": ">= 6.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.4",
-    "@babel/plugin-proposal-class-properties": "^7.5.0",
-    "@babel/preset-env": "^7.5.4",
-    "@babel/preset-typescript": "^7.3.3",
-    "@types/jest": "^24.0.15",
-    "@typescript-eslint/eslint-plugin": "^1.12.0",
-    "@typescript-eslint/parser": "^1.12.0",
-    "babel-eslint": "^10.0.2",
-    "coveralls": "^3.0.5",
-    "eslint": "^6.0.1",
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-typescript": "^7.7.7",
+    "@types/jest": "^24.0.25",
+    "@typescript-eslint/eslint-plugin": "^2.14.0",
+    "@typescript-eslint/parser": "^2.14.0",
+    "babel-eslint": "^10.0.3",
+    "coveralls": "^3.0.9",
+    "eslint": "^6.8.0",
     "eslint-config-last": "^0.0.5",
-    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-babel": "^5.3.0",
-    "eslint-plugin-jest": "^22.7.2",
-    "eslint-plugin-prettier": "^3.1.0",
-    "jest": "^24.8.0",
-    "prettier": "^1.18.2",
-    "typescript": "^3.5.3"
+    "eslint-plugin-jest": "^23.2.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1",
+    "typedoc": "^0.15.6",
+    "typedoc-plugin-external-module-name": "^2.1.0",
+    "typedoc-plugin-sourcefile-url": "^1.0.4",
+    "typescript": "^3.7.4"
   },
   "dependencies": {
     "tslib": "^1.10.0"

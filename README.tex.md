@@ -16,6 +16,10 @@ Discrete Common Sense Logic only allows `true`, `false`, `maybe`, `never` or `un
 
 In Fuzzy Common Sense Logic the value is five-dimensional unit vector. Each vector component is a fuzzy value (between 0.0 and 1.0 inclusive) of respective `true`, `false`, `maybe`, `never` or `undefined` category.
 
+## Documentation
+
+API Documentation: [https://timashev.dev/human-logic](https://timashev.dev/human-logic/globals.html)
+
 ## Installation
 
 With NPM:

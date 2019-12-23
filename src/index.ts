@@ -1,3 +1,9 @@
+/**
+ * Polymorphic Functions
+ * @module index
+ */
+
+/** @hidden */
 import {
   Category,
   Categories,
@@ -10,6 +16,7 @@ import {
   MAYBE,
   TRUE
 } from './Category';
+/** @hidden */
 import {
   Fuzzy,
   not as fNot,
@@ -19,6 +26,7 @@ import {
   FUZZY_TRUE,
   FUZZY_FALSE
 } from './Fuzzy';
+/** @hidden */
 import {
   Logic,
   LogicHash,
@@ -29,6 +37,7 @@ import {
   normalize as lNormalize
 } from './Logic';
 
+/** Logical NOT */
 export function not(value: Fuzzy): Fuzzy;
 export function not(value: Category): Category;
 export function not(value: Logic): Logic;
@@ -43,6 +52,7 @@ export function not(value: Category | Fuzzy | Logic): Category | Fuzzy | Logic {
   throw new TypeError('Invalid argument type');
 }
 
+/** Logical AND */
 export function and(a: Fuzzy, b: Fuzzy): Fuzzy;
 export function and(a: Category, b: Category): Category;
 export function and(a: Logic, b: Logic): Logic;
@@ -57,6 +67,7 @@ export function and(a: Category | Logic, b: Category | Logic): Category | Logic 
   throw new TypeError('Invalid argument type');
 }
 
+/** Logical OR */
 export function or(a: Fuzzy, b: Fuzzy): Fuzzy;
 export function or(a: Category, b: Category): Category;
 export function or(a: Logic, b: Logic): Logic;
@@ -71,6 +82,13 @@ export function or(a: Category | Logic, b: Category | Logic): Category | Logic {
   throw new TypeError('Invalid argument type');
 }
 
+/**
+ * Ensures the all fuzzy values are between `0.0` and `1.0`.
+ *
+ * @return For `Fuzzy` value lesser than `0.0` returns `0.0`,
+ * for `Fuzzy` value greater then `1.0` returns `1.0`, otherwise returns original `Fuzzy` value.
+ * See [[Logic]] for details on Fuzzy Human Logic values normalization.
+ */
 export function normalize(value: Fuzzy): Fuzzy;
 export function normalize(value: Logic): Logic;
 export function normalize(value: Fuzzy | Logic): Fuzzy | Logic {
@@ -79,6 +97,7 @@ export function normalize(value: Fuzzy | Logic): Fuzzy | Logic {
   throw new TypeError('Invalid argument type');
 }
 
+/** @hidden */
 export {
   // Categories
   Category,
