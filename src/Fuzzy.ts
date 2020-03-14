@@ -2,7 +2,7 @@
  * Fuzzy Logic (based on Zadeh operators)
  *
  * Fuzzy logical value is a number between `0.0` (0% probability) and `1.0` (100% probability).
- * @module Fuzzy
+ * @packageDocumentation @module Fuzzy
  */
 
 /**

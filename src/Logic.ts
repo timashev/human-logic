@@ -11,7 +11,7 @@
  * In Fuzzy Common Sense Logic the value is five-dimensional unit vector.
  * Each vector component is a fuzzy value (between 0.0 and 1.0 inclusive)
  * of respective `true`, `false`, `maybe`, `never` or `undefined` category.
- * @module Logic
+ * @packageDocumentation @module Logic
  */
 
 /** @hidden */
