@@ -18,7 +18,7 @@ In Fuzzy Common Sense Logic the value is five-dimensional unit vector. Each vect
 
 ## Documentation
 
-API Documentation: [https://timashev.dev/human-logic](https://timashev.dev/human-logic/globals.html)
+API Documentation: [https://timashev.dev/human-logic](https://timashev.dev/human-logic/modules.html)
 
 ## Installation
 
