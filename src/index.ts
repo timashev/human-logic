@@ -1,6 +1,5 @@
 /**
  * Polymorphic Functions
- * @packageDocumentation @module index
  */
 
 /** @hidden */

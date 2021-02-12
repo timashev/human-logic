@@ -2,7 +2,6 @@
  * Discrete Common Sense Logic
  *
  * Discrete Common Sense Logic only allows `true`, `false`, `maybe`, `never` or `undefined` as a value.
- * @packageDocumentation @module Category
  */
 
 /**

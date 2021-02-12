@@ -1,10 +1,8 @@
 {
-  "mode": "modules",
   "out": "docs",
   "categorizeByGroup": false,
   "excludePrivate": true,
   "excludeProtected": true,
-  "excludeNotExported": true,
   "excludeExternals": true,
   "exclude": "**/*+(.spec).ts"
 }
