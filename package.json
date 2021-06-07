@@ -1,6 +1,6 @@
 {
   "name": "human-logic",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Human Logic",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "all": "yarn lint && yarn test && yarn build",
+    "all": "yarn lint && yarn test && yarn build && yarn docs",
     "test": "npx jest",
     "test:watch": "npx jest --watch",
     "lint": "npx eslint -c .eslintrc.js --ext .ts src",
@@ -42,23 +42,23 @@
     "node": ">= 6.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.0",
+    "@babel/core": "^7.14.3",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/preset-env": "^7.14.1",
+    "@babel/preset-env": "^7.14.4",
     "@babel/preset-typescript": "^7.13.0",
     "@types/jest": "^26.0.23",
-    "@typescript-eslint/eslint-plugin": "^4.22.1",
-    "@typescript-eslint/parser": "^4.22.1",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
     "babel-eslint": "^10.1.0",
     "coveralls": "^3.1.0",
-    "eslint": "^7.26.0",
+    "eslint": "^7.28.0",
     "eslint-config-last": "^0.0.5",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-prettier": "^3.4.0",
-    "jest": "^26.6.3",
-    "prettier": "^2.2.1",
+    "jest": "^27.0.4",
+    "prettier": "^2.3.1",
     "typedoc": "^0.20.36",
     "typedoc-plugin-sourcefile-url": "^1.0.6",
     "typescript": "^4.2.4"
