@@ -2,6 +2,7 @@
  * Discrete Common Sense Logic
  *
  * Discrete Common Sense Logic only allows `true`, `false`, `maybe`, `never` or `undefined` as a value.
+ * @module
  */
 
 /**
@@ -25,30 +26,30 @@ export enum Category {
 /**
  * Discrete Logical Category of “totally unknown”
  */
-export const UNDEF: Category = Category.UNDEF;
+export const UNDEF: Category = Category.UNDEF as const;
 /**
  * Discrete Logical Category of “certainly negative”
  */
-export const FALSE: Category = Category.FALSE;
+export const FALSE: Category = Category.FALSE as const;
 /**
  * Discrete Logical Category of “impossible” (neither positive nor negative)
  */
-export const NEVER: Category = Category.NEVER;
+export const NEVER: Category = Category.NEVER as const;
 /**
  * Discrete Logical Category of “uncertain” (could be either positive or negative)
  */
-export const MAYBE: Category = Category.MAYBE;
+export const MAYBE: Category = Category.MAYBE as const;
 /**
  * Discrete Logical Category of “certainly positive”
  */
-export const TRUE: Category = Category.TRUE;
+export const TRUE: Category = Category.TRUE as const;
 
 /**
  * List of all five categories.
  *
  * Useful to iterate through all five logical categories.
  */
-export const Categories = [UNDEF, FALSE, NEVER, MAYBE, TRUE];
+export const Categories = [UNDEF, FALSE, NEVER, MAYBE, TRUE] as const;
 
 /**
  * Discrete Logical NOT:

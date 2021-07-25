@@ -1,5 +1,6 @@
 /**
  * Polymorphic Functions
+ * @module
  */
 
 /** @hidden */

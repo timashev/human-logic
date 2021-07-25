@@ -2,6 +2,7 @@
  * Fuzzy Logic (based on Zadeh operators)
  *
  * Fuzzy logical value is a number between `0.0` (0% probability) and `1.0` (100% probability).
+ * @module
  */
 
 /**
@@ -14,11 +15,11 @@ export type Fuzzy = number;
 /**
  * Fuzzy logical value of `false` (zero probability)
  */
-export const FUZZY_FALSE: Fuzzy = 0.0;
+export const FUZZY_FALSE: Fuzzy = 0.0 as const;
 /**
  * Fuzzy logical value of `true` (100% probability)
  */
-export const FUZZY_TRUE: Fuzzy = 1.0;
+export const FUZZY_TRUE: Fuzzy = 1.0 as const;
 
 /**
  * Ensures the fuzzy value is between `0.0` and `1.0`.
