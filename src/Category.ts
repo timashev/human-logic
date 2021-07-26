@@ -6,43 +6,25 @@
  */
 
 /**
- * Base Discrete Common Sense Logic type.
- *
- * To avoid conflict with Fuzzy values (numbers from `0.0` to `1.0`) we start numbering from `2`.
- */
-export enum Category {
-  /** Totally unknown */
-  UNDEF = 2,
-  /** Certainly negative */
-  FALSE = 3,
-  /** Impossible (neither positive nor negative) */
-  NEVER = 4,
-  /** Uncertain (could be either positive or negative) */
-  MAYBE = 5,
-  /** Certainly positive */
-  TRUE = 6
-}
-
-/**
  * Discrete Logical Category of “totally unknown”
  */
-export const UNDEF: Category = Category.UNDEF as const;
+export const UNDEF = 'UNDEF' as const;
 /**
  * Discrete Logical Category of “certainly negative”
  */
-export const FALSE: Category = Category.FALSE as const;
+export const FALSE = 'FALSE' as const;
 /**
  * Discrete Logical Category of “impossible” (neither positive nor negative)
  */
-export const NEVER: Category = Category.NEVER as const;
+export const NEVER = 'NEVER' as const;
 /**
  * Discrete Logical Category of “uncertain” (could be either positive or negative)
  */
-export const MAYBE: Category = Category.MAYBE as const;
+export const MAYBE = 'MAYBE' as const;
 /**
  * Discrete Logical Category of “certainly positive”
  */
-export const TRUE: Category = Category.TRUE as const;
+export const TRUE = 'TRUE' as const;
 
 /**
  * List of all five categories.
@@ -50,6 +32,17 @@ export const TRUE: Category = Category.TRUE as const;
  * Useful to iterate through all five logical categories.
  */
 export const Categories = [UNDEF, FALSE, NEVER, MAYBE, TRUE] as const;
+
+/**
+ * Base Discrete Common Sense Logic type.
+ *
+ * * `UNDEF` – Totally unknown
+ * * `FALSE` – Certainly negative
+ * * `NEVER` – Impossible (neither positive nor negative)
+ * * `MAYBE` – Uncertain (could be either positive or negative)
+ * * `TRUE` – Certainly positive
+ */
+export type Category = typeof Categories[number];
 
 /**
  * Discrete Logical NOT:

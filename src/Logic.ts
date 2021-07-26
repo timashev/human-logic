@@ -17,29 +17,18 @@
 /** @hidden */
 import { Fuzzy, not as fNot, and as fAnd, or as fOr, FUZZY_FALSE, FUZZY_TRUE } from './Fuzzy';
 /** @hidden */
-import { Category } from './Category';
-
-/**
- * Convenient object-like hash to provide and receive Fuzzy Common Sense logical values.
- */
-export interface LogicHash {
-  _undef?: Fuzzy;
-  _false?: Fuzzy;
-  _never?: Fuzzy;
-  _maybe?: Fuzzy;
-  _true?: Fuzzy;
-}
+import { Category, UNDEF, FALSE, NEVER, MAYBE, TRUE } from './Category';
 
 /**
  * Object-like hash to provide and receive Fuzzy Common Sense logical values where [[Category]]
  * values are used as keys.
  */
 export interface LogicValues {
-  [Category.UNDEF]: Fuzzy;
-  [Category.FALSE]: Fuzzy;
-  [Category.NEVER]: Fuzzy;
-  [Category.MAYBE]: Fuzzy;
-  [Category.TRUE]: Fuzzy;
+  [UNDEF]: Fuzzy;
+  [FALSE]: Fuzzy;
+  [NEVER]: Fuzzy;
+  [MAYBE]: Fuzzy;
+  [TRUE]: Fuzzy;
 }
 
 /**
@@ -49,16 +38,16 @@ export class Logic {
   private values: LogicValues;
 
   /**
-   * Basic constructor. See [[fromCategory]], [[fromArray]] and [[fromHash]]
+   * Basic constructor. See [[fromCategory]], [[fromArray]] and [[fromValues]]
    * for more convenient instantiation methods.
    */
   public constructor(_undef?: Fuzzy, _false?: Fuzzy, _never?: Fuzzy, _maybe?: Fuzzy, _true?: Fuzzy) {
     this.values = {
-      [Category.UNDEF]: _undef || FUZZY_FALSE,
-      [Category.FALSE]: _false || FUZZY_FALSE,
-      [Category.NEVER]: _never || FUZZY_FALSE,
-      [Category.MAYBE]: _maybe || FUZZY_FALSE,
-      [Category.TRUE]: _true || FUZZY_FALSE
+      [UNDEF]: _undef || FUZZY_FALSE,
+      [FALSE]: _false || FUZZY_FALSE,
+      [NEVER]: _never || FUZZY_FALSE,
+      [MAYBE]: _maybe || FUZZY_FALSE,
+      [TRUE]: _true || FUZZY_FALSE
     };
   }
 
@@ -68,11 +57,11 @@ export class Logic {
    */
   public static fromCategory(category: Category): Logic {
     return new Logic(
-      category === Category.UNDEF ? FUZZY_TRUE : FUZZY_FALSE,
-      category === Category.FALSE ? FUZZY_TRUE : FUZZY_FALSE,
-      category === Category.NEVER ? FUZZY_TRUE : FUZZY_FALSE,
-      category === Category.MAYBE ? FUZZY_TRUE : FUZZY_FALSE,
-      category === Category.TRUE ? FUZZY_TRUE : FUZZY_FALSE
+      category === UNDEF ? FUZZY_TRUE : FUZZY_FALSE,
+      category === FALSE ? FUZZY_TRUE : FUZZY_FALSE,
+      category === NEVER ? FUZZY_TRUE : FUZZY_FALSE,
+      category === MAYBE ? FUZZY_TRUE : FUZZY_FALSE,
+      category === TRUE ? FUZZY_TRUE : FUZZY_FALSE
     );
   }
 
@@ -81,20 +70,14 @@ export class Logic {
    * @param fuzzy The categories order in array is: [[UNDEF]], [[FALSE]], [[NEVER]], [[MAYBE]], [[TRUE]].
    */
   public static fromArray(fuzzy: Fuzzy[]): Logic {
-    return new Logic(
-      fuzzy[Category.UNDEF - Category.UNDEF],
-      fuzzy[Category.FALSE - Category.UNDEF],
-      fuzzy[Category.NEVER - Category.UNDEF],
-      fuzzy[Category.MAYBE - Category.UNDEF],
-      fuzzy[Category.TRUE - Category.UNDEF]
-    );
+    return new Logic(fuzzy[0], fuzzy[1], fuzzy[2], fuzzy[3], fuzzy[4]);
   }
 
   /**
-   * Creates new [[Logic]] instance from [[LogicHash]].
+   * Creates new [[Logic]] instance from [[LogicValues]].
    */
-  public static fromHash(fuzzy: LogicHash): Logic {
-    return new Logic(fuzzy._undef, fuzzy._false, fuzzy._never, fuzzy._maybe, fuzzy._true);
+  public static fromValues(fuzzy: LogicValues): Logic {
+    return new Logic(fuzzy.UNDEF, fuzzy.FALSE, fuzzy.NEVER, fuzzy.MAYBE, fuzzy.TRUE);
   }
 
   /**
@@ -103,25 +86,12 @@ export class Logic {
    */
   public asArray(): Fuzzy[] {
     return [
-      this.values[Category.UNDEF],
-      this.values[Category.FALSE],
-      this.values[Category.NEVER],
-      this.values[Category.MAYBE],
-      this.values[Category.TRUE]
+      this.values[UNDEF],
+      this.values[FALSE],
+      this.values[NEVER],
+      this.values[MAYBE],
+      this.values[TRUE]
     ];
-  }
-
-  /**
-   * Retrieves [[LogicHash]].
-   */
-  public asHash(): LogicHash {
-    return {
-      _undef: this.values[Category.UNDEF],
-      _false: this.values[Category.FALSE],
-      _never: this.values[Category.NEVER],
-      _maybe: this.values[Category.MAYBE],
-      _true: this.values[Category.TRUE]
-    };
   }
 
   /**
@@ -129,11 +99,11 @@ export class Logic {
    * has a value greater than [[FUZZY_FALSE]].
    */
   public asCategory(): Category | undefined {
-    let result: Category = Category.UNDEF;
-    if (this.values[result] < this.values[Category.FALSE]) result = Category.FALSE;
-    if (this.values[result] < this.values[Category.NEVER]) result = Category.NEVER;
-    if (this.values[result] < this.values[Category.MAYBE]) result = Category.MAYBE;
-    if (this.values[result] < this.values[Category.TRUE]) result = Category.TRUE;
+    let result: Category = UNDEF;
+    if (this.values[result] < this.values[FALSE]) result = FALSE;
+    if (this.values[result] < this.values[NEVER]) result = NEVER;
+    if (this.values[result] < this.values[MAYBE]) result = MAYBE;
+    if (this.values[result] < this.values[TRUE]) result = TRUE;
     return this.values[result] > FUZZY_FALSE ? result : undefined;
   }
 
@@ -154,11 +124,11 @@ export class Logic {
    */
   public clone(): Logic {
     return new Logic(
-      this.values[Category.UNDEF],
-      this.values[Category.FALSE],
-      this.values[Category.NEVER],
-      this.values[Category.MAYBE],
-      this.values[Category.TRUE]
+      this.values[UNDEF],
+      this.values[FALSE],
+      this.values[NEVER],
+      this.values[MAYBE],
+      this.values[TRUE]
     );
   }
 
@@ -181,11 +151,7 @@ export class Logic {
 
   protected scalar(): number {
     return (
-      this.values[Category.UNDEF] +
-      this.values[Category.FALSE] +
-      this.values[Category.NEVER] +
-      this.values[Category.MAYBE] +
-      this.values[Category.TRUE]
+      this.values[UNDEF] + this.values[FALSE] + this.values[NEVER] + this.values[MAYBE] + this.values[TRUE]
     );
   }
 
@@ -225,15 +191,15 @@ export class Logic {
   public not(): Logic {
     return new Logic(
       // UNDEF:
-      this.values[Category.UNDEF],
+      this.values[UNDEF],
       // FALSE:
-      this.values[Category.TRUE],
+      this.values[TRUE],
       // NEVER:
-      this.values[Category.MAYBE],
+      this.values[MAYBE],
       // MAYBE:
-      this.values[Category.NEVER],
+      this.values[NEVER],
       // TRUE:
-      this.values[Category.FALSE]
+      this.values[FALSE]
     );
   }
 
@@ -243,7 +209,7 @@ export class Logic {
   public and(value: Logic): Logic {
     if (!value || !(value instanceof Logic)) throw new TypeError('Invalid argument type');
     const values = value.getValues();
-    const undef = fOr(this.values[Category.UNDEF], values[Category.UNDEF]);
+    const undef = fOr(this.values[UNDEF], values[UNDEF]);
     const notUndef: Fuzzy = fNot(undef);
     return new Logic(
       // UNDEF:
@@ -252,32 +218,32 @@ export class Logic {
       fAnd(
         notUndef,
         fOr(
-          this.values[Category.FALSE],
-          values[Category.FALSE],
-          fAnd(this.values[Category.MAYBE], values[Category.NEVER]),
-          fAnd(this.values[Category.NEVER], values[Category.MAYBE])
+          this.values[FALSE],
+          values[FALSE],
+          fAnd(this.values[MAYBE], values[NEVER]),
+          fAnd(this.values[NEVER], values[MAYBE])
         )
       ),
       // NEVER:
       fAnd(
         notUndef,
         fOr(
-          fAnd(this.values[Category.NEVER], values[Category.NEVER]),
-          fAnd(this.values[Category.NEVER], values[Category.TRUE]),
-          fAnd(this.values[Category.TRUE], values[Category.NEVER])
+          fAnd(this.values[NEVER], values[NEVER]),
+          fAnd(this.values[NEVER], values[TRUE]),
+          fAnd(this.values[TRUE], values[NEVER])
         )
       ),
       // MAYBE:
       fAnd(
         notUndef,
         fOr(
-          fAnd(this.values[Category.MAYBE], values[Category.MAYBE]),
-          fAnd(this.values[Category.MAYBE], values[Category.TRUE]),
-          fAnd(this.values[Category.TRUE], values[Category.MAYBE])
+          fAnd(this.values[MAYBE], values[MAYBE]),
+          fAnd(this.values[MAYBE], values[TRUE]),
+          fAnd(this.values[TRUE], values[MAYBE])
         )
       ),
       // TRUE:
-      fAnd(notUndef, this.values[Category.TRUE], values[Category.TRUE])
+      fAnd(notUndef, this.values[TRUE], values[TRUE])
     ).normalize();
   }
 
@@ -287,39 +253,39 @@ export class Logic {
   public or(value: Logic): Logic {
     if (!value || !(value instanceof Logic)) throw new TypeError('Invalid argument type');
     const values = value.getValues();
-    const undef = fOr(this.values[Category.UNDEF], values[Category.UNDEF]);
+    const undef = fOr(this.values[UNDEF], values[UNDEF]);
     const notUndef: Fuzzy = fNot(undef);
     return new Logic(
       // UNDEF:
       undef,
       // FALSE:
-      fAnd(notUndef, this.values[Category.FALSE], values[Category.FALSE]),
+      fAnd(notUndef, this.values[FALSE], values[FALSE]),
       // NEVER:
       fAnd(
         notUndef,
         fOr(
-          fAnd(this.values[Category.NEVER], values[Category.NEVER]),
-          fAnd(this.values[Category.NEVER], values[Category.FALSE]),
-          fAnd(this.values[Category.FALSE], values[Category.NEVER])
+          fAnd(this.values[NEVER], values[NEVER]),
+          fAnd(this.values[NEVER], values[FALSE]),
+          fAnd(this.values[FALSE], values[NEVER])
         )
       ),
       // MAYBE:
       fAnd(
         notUndef,
         fOr(
-          fAnd(this.values[Category.MAYBE], values[Category.MAYBE]),
-          fAnd(this.values[Category.MAYBE], values[Category.FALSE]),
-          fAnd(this.values[Category.FALSE], values[Category.MAYBE])
+          fAnd(this.values[MAYBE], values[MAYBE]),
+          fAnd(this.values[MAYBE], values[FALSE]),
+          fAnd(this.values[FALSE], values[MAYBE])
         )
       ),
       // TRUE:
       fAnd(
         notUndef,
         fOr(
-          this.values[Category.TRUE],
-          values[Category.TRUE],
-          fAnd(this.values[Category.MAYBE], values[Category.NEVER]),
-          fAnd(this.values[Category.NEVER], values[Category.MAYBE])
+          this.values[TRUE],
+          values[TRUE],
+          fAnd(this.values[MAYBE], values[NEVER]),
+          fAnd(this.values[NEVER], values[MAYBE])
         )
       )
     ).normalize();
@@ -334,26 +300,26 @@ export class Logic {
   public add(value: Logic): Logic {
     if (!value || !(value instanceof Logic)) throw new TypeError('Invalid argument type');
     const values = value.getValues();
-    this.values[Category.UNDEF] += values[Category.UNDEF];
-    this.values[Category.FALSE] += values[Category.FALSE];
-    this.values[Category.NEVER] += values[Category.NEVER];
-    this.values[Category.MAYBE] += values[Category.MAYBE];
-    this.values[Category.TRUE] += values[Category.TRUE];
+    this.values[UNDEF] += values[UNDEF];
+    this.values[FALSE] += values[FALSE];
+    this.values[NEVER] += values[NEVER];
+    this.values[MAYBE] += values[MAYBE];
+    this.values[TRUE] += values[TRUE];
     return this;
   }
 
   protected multiply(value: number): Logic {
     return new Logic(
       // UNDEF:
-      this.values[Category.UNDEF] * value,
+      this.values[UNDEF] * value,
       // FALSE:
-      this.values[Category.FALSE] * value,
+      this.values[FALSE] * value,
       // NEVER:
-      this.values[Category.NEVER] * value,
+      this.values[NEVER] * value,
       // MAYBE:
-      this.values[Category.MAYBE] * value,
+      this.values[MAYBE] * value,
       // TRUE:
-      this.values[Category.TRUE] * value
+      this.values[TRUE] * value
     );
   }
 
@@ -362,11 +328,11 @@ export class Logic {
    */
   public eq(category: Category): boolean {
     return (
-      (category === Category.UNDEF || this.values[category] > this.values[Category.UNDEF]) &&
-      (category === Category.FALSE || this.values[category] > this.values[Category.FALSE]) &&
-      (category === Category.NEVER || this.values[category] > this.values[Category.NEVER]) &&
-      (category === Category.MAYBE || this.values[category] > this.values[Category.MAYBE]) &&
-      (category === Category.TRUE || this.values[category] > this.values[Category.TRUE])
+      (category === UNDEF || this.values[category] > this.values[UNDEF]) &&
+      (category === FALSE || this.values[category] > this.values[FALSE]) &&
+      (category === NEVER || this.values[category] > this.values[NEVER]) &&
+      (category === MAYBE || this.values[category] > this.values[MAYBE]) &&
+      (category === TRUE || this.values[category] > this.values[TRUE])
     );
   }
 
@@ -375,11 +341,11 @@ export class Logic {
    */
   public ne(category: Category): boolean {
     return (
-      (category !== Category.UNDEF && this.values[category] <= this.values[Category.UNDEF]) ||
-      (category !== Category.FALSE && this.values[category] <= this.values[Category.FALSE]) ||
-      (category !== Category.NEVER && this.values[category] <= this.values[Category.NEVER]) ||
-      (category !== Category.MAYBE && this.values[category] <= this.values[Category.MAYBE]) ||
-      (category !== Category.TRUE && this.values[category] <= this.values[Category.TRUE])
+      (category !== UNDEF && this.values[category] <= this.values[UNDEF]) ||
+      (category !== FALSE && this.values[category] <= this.values[FALSE]) ||
+      (category !== NEVER && this.values[category] <= this.values[NEVER]) ||
+      (category !== MAYBE && this.values[category] <= this.values[MAYBE]) ||
+      (category !== TRUE && this.values[category] <= this.values[TRUE])
     );
   }
 }

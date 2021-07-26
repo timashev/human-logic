@@ -22,7 +22,7 @@ import { not as lNot, and as lAnd, or as lOr, normalize as lNormalize } from './
 describe('Polymorphic Functions', (): void => {
   describe('Category', (): void => {
     Categories.forEach((value): void => {
-      test(`not ${Category[value]}`, (): void => {
+      test(`not ${value}`, (): void => {
         expect(not(value)).toBe(dNot(value));
       });
       test(`${value} and undefined`, (): void => {
@@ -38,10 +38,10 @@ describe('Polymorphic Functions', (): void => {
         expect((): Category => or(undefined, value)).toThrow(TypeError);
       });
       Categories.forEach((value2): void => {
-        test(`${Category[value]} and ${Category[value2]}`, (): void => {
+        test(`${value} and ${value2}`, (): void => {
           expect(and(value, value2)).toBe(dAnd(value, value2));
         });
-        test(`${Category[value]} or ${Category[value2]}`, (): void => {
+        test(`${value} or ${value2}`, (): void => {
           expect(or(value, value2)).toBe(dOr(value, value2));
         });
       });

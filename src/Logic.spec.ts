@@ -13,7 +13,7 @@ const testStep: Fuzzy[] = [
 describe('Common Sense', (): void => {
   describe('constructors', (): void => {
     Categories.forEach((category): void => {
-      test(`fromCategory(${Category[category]})`, (): void => {
+      test(`fromCategory(${category})`, (): void => {
         expect(Logic.fromCategory(category).asArray()).toEqual([
           category === UNDEF ? FUZZY_TRUE : FUZZY_FALSE,
           category === FALSE ? FUZZY_TRUE : FUZZY_FALSE,
@@ -63,20 +63,20 @@ describe('Common Sense', (): void => {
                   _never / sum,
                   _maybe / sum,
                   _true / sum
-                ]).asHash();
-                expect(values._undef).toBeCloseTo(_undef / sum);
-                expect(values._false).toBeCloseTo(_false / sum);
-                expect(values._never).toBeCloseTo(_never / sum);
-                expect(values._maybe).toBeCloseTo(_maybe / sum);
-                expect(values._true).toBeCloseTo(_true / sum);
+                ]).asValues();
+                expect(values.UNDEF).toBeCloseTo(_undef / sum);
+                expect(values.FALSE).toBeCloseTo(_false / sum);
+                expect(values.NEVER).toBeCloseTo(_never / sum);
+                expect(values.MAYBE).toBeCloseTo(_maybe / sum);
+                expect(values.TRUE).toBeCloseTo(_true / sum);
               });
-              test(`fromHash ${value.toString()}`, (): void => {
-                const values = Logic.fromHash({
-                  _undef: _undef / sum,
-                  _false: _false / sum,
-                  _never: _never / sum,
-                  _maybe: _maybe / sum,
-                  _true: _true / sum
+              test(`fromValues ${value.toString()}`, (): void => {
+                const values = Logic.fromValues({
+                  UNDEF: _undef / sum,
+                  FALSE: _false / sum,
+                  NEVER: _never / sum,
+                  MAYBE: _maybe / sum,
+                  TRUE: _true / sum
                 }).asValues();
                 expect(values[UNDEF]).toBeCloseTo(_undef / sum);
                 expect(values[FALSE]).toBeCloseTo(_false / sum);
@@ -104,9 +104,7 @@ describe('Common Sense', (): void => {
               });
 
               test(`!${value.toString()} as category`, (): void => {
-                expect(Category[value.not().asCategory()]).toBe(
-                  value.isValid() ? Category[not(category)] : undefined
-                );
+                expect(value.not().asCategory()).toBe(value.isValid() ? not(category) : undefined);
               });
 
               test(`normalized ${value.toString()}`, (): void => {
@@ -127,14 +125,14 @@ describe('Common Sense', (): void => {
               });
 
               test(`category of ${value.toString()}`, (): void => {
-                expect(Category[value.asCategory()]).toBe(value.isValid() ? Category[category] : undefined);
+                expect(value.asCategory()).toBe(value.isValid() ? category : undefined);
               });
 
               Categories.forEach((cat): void => {
-                test(`${value.toString()} eq ${Category[cat]}`, (): void => {
+                test(`${value.toString()} eq ${cat}`, (): void => {
                   expect(value.eq(cat)).toBe(category === cat && value.isValid());
                 });
-                test(`${value.toString()} ne ${Category[cat]}`, (): void => {
+                test(`${value.toString()} ne ${cat}`, (): void => {
                   expect(value.ne(cat)).toBe(category !== cat || !value.isValid());
                 });
               });
@@ -189,11 +187,11 @@ describe('Common Sense', (): void => {
         );
 
         test(`${value1.toString()} && ${value2.toString()}`, (): void => {
-          expect(Category[value1.and(value2).asCategory()]).toBe(Category[and(category1, category2)]);
+          expect(value1.and(value2).asCategory()).toBe(and(category1, category2));
         });
 
         test(`${value1.toString()} || ${value2.toString()}`, (): void => {
-          expect(Category[value1.or(value2).asCategory()]).toBe(Category[or(category1, category2)]);
+          expect(value1.or(value2).asCategory()).toBe(or(category1, category2));
         });
 
         test(`${value1.toString()} + ${value2.toString()}`, (): void => {

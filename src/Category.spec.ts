@@ -1,83 +1,83 @@
-import { Category, Categories, not, and, or, UNDEF, FALSE, NEVER, MAYBE, TRUE } from './Category';
+import { Categories, not, and, or, UNDEF, FALSE, NEVER, MAYBE, TRUE } from './Category';
 
 describe('Categorical NOT', (): void => {
   test('!UNDEF', (): void => {
-    expect(Category[not(UNDEF)]).toBe(Category[UNDEF]);
+    expect(not(UNDEF)).toBe(UNDEF);
   });
   test('!FALSE', (): void => {
-    expect(Category[not(FALSE)]).toBe(Category[TRUE]);
+    expect(not(FALSE)).toBe(TRUE);
   });
   test('!NEVER', (): void => {
-    expect(Category[not(NEVER)]).toBe(Category[MAYBE]);
+    expect(not(NEVER)).toBe(MAYBE);
   });
   test('!MAYBE', (): void => {
-    expect(Category[not(MAYBE)]).toBe(Category[NEVER]);
+    expect(not(MAYBE)).toBe(NEVER);
   });
   test('!TRUE', (): void => {
-    expect(Category[not(TRUE)]).toBe(Category[FALSE]);
+    expect(not(TRUE)).toBe(FALSE);
   });
 });
 
 describe('Categorical AND', (): void => {
   Categories.forEach((value): void =>
-    test(`UNDEF && ${Category[value]}`, (): void => {
-      expect(Category[and(UNDEF, value)]).toBe(Category[UNDEF]);
+    test(`UNDEF && ${value}`, (): void => {
+      expect(and(UNDEF, value)).toBe(UNDEF);
     })
   );
   Categories.forEach((value): void =>
-    test(`FALSE && ${Category[value]}`, (): void => {
-      expect(Category[and(FALSE, value)]).toBe(Category[value === UNDEF ? UNDEF : FALSE]);
+    test(`FALSE && ${value}`, (): void => {
+      expect(and(FALSE, value)).toBe(value === UNDEF ? UNDEF : FALSE);
     })
   );
   Categories.forEach((value): void =>
-    test(`NEVER && ${Category[value]}`, (): void => {
-      expect(Category[and(NEVER, value)]).toBe(
-        Category[((value === FALSE || value === MAYBE) && FALSE) || (value === UNDEF ? UNDEF : NEVER)]
+    test(`NEVER && ${value}`, (): void => {
+      expect(and(NEVER, value)).toBe(
+        ((value === FALSE || value === MAYBE) && FALSE) || (value === UNDEF ? UNDEF : NEVER)
       );
     })
   );
   Categories.forEach((value): void =>
-    test(`MAYBE && ${Category[value]}`, (): void => {
-      expect(Category[and(MAYBE, value)]).toBe(
-        Category[((value === FALSE || value === NEVER) && FALSE) || (value === UNDEF ? UNDEF : MAYBE)]
+    test(`MAYBE && ${value}`, (): void => {
+      expect(and(MAYBE, value)).toBe(
+        ((value === FALSE || value === NEVER) && FALSE) || (value === UNDEF ? UNDEF : MAYBE)
       );
     })
   );
   Categories.forEach((value): void =>
-    test(`TRUE && ${Category[value]}`, (): void => {
-      expect(Category[and(TRUE, value)]).toBe(Category[value === UNDEF ? UNDEF : value]);
+    test(`TRUE && ${value}`, (): void => {
+      expect(and(TRUE, value)).toBe(value === UNDEF ? UNDEF : value);
     })
   );
 });
 
 describe('Categorical OR', (): void => {
   Categories.forEach((value): void =>
-    test(`UNDEF || ${Category[value]}`, (): void => {
-      expect(Category[or(UNDEF, value)]).toBe(Category[UNDEF]);
+    test(`UNDEF || ${value}`, (): void => {
+      expect(or(UNDEF, value)).toBe(UNDEF);
     })
   );
   Categories.forEach((value): void =>
-    test(`FALSE || ${Category[value]}`, (): void => {
-      expect(Category[or(FALSE, value)]).toBe(Category[value === UNDEF ? UNDEF : value]);
+    test(`FALSE || ${value}`, (): void => {
+      expect(or(FALSE, value)).toBe(value === UNDEF ? UNDEF : value);
     })
   );
   Categories.forEach((value): void =>
-    test(`NEVER || ${Category[value]}`, (): void => {
-      expect(Category[or(NEVER, value)]).toBe(
-        Category[((value === TRUE || value === MAYBE) && TRUE) || (value === UNDEF ? UNDEF : NEVER)]
+    test(`NEVER || ${value}`, (): void => {
+      expect(or(NEVER, value)).toBe(
+        ((value === TRUE || value === MAYBE) && TRUE) || (value === UNDEF ? UNDEF : NEVER)
       );
     })
   );
   Categories.forEach((value): void =>
-    test(`MAYBE || ${Category[value]}`, (): void => {
-      expect(Category[or(MAYBE, value)]).toBe(
-        Category[((value === TRUE || value === NEVER) && TRUE) || (value === UNDEF ? UNDEF : MAYBE)]
+    test(`MAYBE || ${value}`, (): void => {
+      expect(or(MAYBE, value)).toBe(
+        ((value === TRUE || value === NEVER) && TRUE) || (value === UNDEF ? UNDEF : MAYBE)
       );
     })
   );
   Categories.forEach((value): void =>
-    test(`TRUE || ${Category[value]}`, (): void => {
-      expect(Category[or(TRUE, value)]).toBe(Category[value === UNDEF ? UNDEF : TRUE]);
+    test(`TRUE || ${value}`, (): void => {
+      expect(or(TRUE, value)).toBe(value === UNDEF ? UNDEF : TRUE);
     })
   );
 });

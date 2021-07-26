@@ -16,6 +16,14 @@ Discrete Common Sense Logic only allows `true`, `false`, `maybe`, `never` or `un
 
 In Fuzzy Common Sense Logic the value is five-dimensional unit vector. Each vector component is a fuzzy value (between 0.0 and 1.0 inclusive) of respective `true`, `false`, `maybe`, `never` or `undefined` category.
 
+## Migration from v1 to v2
+
+* `Category` type was migrated from [numeric enum](https://www.typescriptlang.org/docs/handbook/enums.html#numeric-enums) to `string` [const assertions](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#const-assertions)
+* `Category` type values `UNDEF`, `FALSE`, `NEVER`, `MAYBE`, `TRUE` are now strings (not numbers).
+* `LogicHash` interface was removed – use `LogicValues` interface instead.
+* `Logic.asHash(...)` was removed – use `Logic.asValues(...)` instead.
+* `Logic.fromHash(...)` was replaced by new method `Logic.fromValues(...)`.
+
 ## Documentation
 
 API Documentation: [https://timashev.dev/human-logic](https://timashev.dev/human-logic/modules.html)
@@ -105,8 +113,6 @@ and(MAYBE, NEVER)
 // => FALSE
 or(MAYBE, NEVER)
 // => TRUE
-Category[UNDEF]
-// => 'UNDEF'
 Categories
 // => [UNDEF, FALSE, NEVER, MAYBE, TRUE]
 ```
@@ -129,12 +135,12 @@ where "<img src="/tex/1bf49790e3d1ca92411e3e1573a7d714.svg?invert_in_darkmode&sa
 // new instance
 const value = new Logic(0.1, 0.2, 0.3, 0.1, 0.4);
 // or
-const value = Logic.fromHash({
-  _undef: 0.1,
-  _false: 0.2,
-  _never: 0.3,
-  _maybe: 0.1,
-  _true:  0.4 // — dominating category
+const value = Logic.fromValues({
+  UNDEF: 0.1,
+  FALSE: 0.2,
+  NEVER: 0.3,
+  MAYBE: 0.1,
+  TRUE:  0.4 // — dominating category
 });
 // or
 const value = Logic.fromArray([0.1, 0.2, 0.3, 0.1, 0.4]);
@@ -154,8 +160,8 @@ value.ne(MAYBE) // Not equal to category
 const value = Logic.fromCategory(MAYBE);
 value.asArray()
 // => [0.0, 0.0, 0.0, 1.0, 0.0]
-value.asHash()
-// => { _undef: 0.0, _false: 0.0, _never: 0.0, _maybe: 1.0, _true: 0.0 }
+value.asValues()
+// => { UNDEF: 0.0, FALSE: 0.0, NEVER: 0.0, MAYBE: 1.0, TRUE: 0.0 }
 value.asValues()
 // => { [UNDEF]: 0.0, [FALSE]: 0.0, [NEVER]: 0.0, [MAYBE]: 1.0, [TRUE]: 0.0 }
 
@@ -167,12 +173,12 @@ clonedValue === value
 // false
 
 // Normalization
-const nonNormalizedValue = Logic.fromHash({
-  _undef: 2,
-  _false: 3,
-  _never: 4,
-  _maybe: 5,
-  _true:  6
+const nonNormalizedValue = Logic.fromValues({
+  UNDEF: 2,
+  FALSE: 3,
+  NEVER: 4,
+  MAYBE: 5,
+  TRUE:  6
 });
 const normalizedValue = nonNormalizedValue.normalize();
 normalizedValue.asArray()
@@ -184,55 +190,55 @@ nonNormalizedValue.getNormalized(NEVER)
 ### Logical NOT
 
 ```JavaScript
-const value = Logic.fromHash({
-  _undef: 0.10, // 10%
-  _false: 0.15, // 15%
-  _never: 0.20, // 20%
-  _maybe: 0.25, // 25%
-  _true:  0.30  // 30% — dominating category
+const value = Logic.fromValues({
+  UNDEF: 0.10, // 10%
+  FALSE: 0.15, // 15%
+  NEVER: 0.20, // 20%
+  MAYBE: 0.25, // 25%
+  TRUE:  0.30  // 30% — dominating category
 });
 
 // Use either class method:
-value.not().asHash()
+value.not().asValues()
 // or polymorphic function:
-not(value).asHash()
+not(value).asValues()
 // => {
-//   _undef: 0.1,  // 10%
-//   _false: 0.3,  // 30% — dominating category
-//   _never: 0.25, // 25%
-//   _maybe: 0.2,  // 20%
-//   _true:  0.15  // 15%
+//   UNDEF: 0.1,  // 10%
+//   FALSE: 0.3,  // 30% — dominating category
+//   NEVER: 0.25, // 25%
+//   MAYBE: 0.2,  // 20%
+//   TRUE:  0.15  // 15%
 // }
 ```
 
 ### Logical AND
 
 ```JavaScript
-const value1 = Logic.fromHash({
-  _undef: 0.15, // 15%
-  _false: 0.10, // 10%
-  _never: 0.25, // 25%
-  _maybe: 0.30, // 30% — dominating category
-  _true:  0.20  // 20%
+const value1 = Logic.fromValues({
+  UNDEF: 0.15, // 15%
+  FALSE: 0.10, // 10%
+  NEVER: 0.25, // 25%
+  MAYBE: 0.30, // 30% — dominating category
+  TRUE:  0.20  // 20%
 });
-const value2 = Logic.fromHash({
-  _undef: 0.20, // 20%
-  _false: 0.30, // 30% — dominating category
-  _never: 0.10, // 10%
-  _maybe: 0.15, // 15%
-  _true:  0.25  // 25%
+const value2 = Logic.fromValues({
+  UNDEF: 0.20, // 20%
+  FALSE: 0.30, // 30% — dominating category
+  NEVER: 0.10, // 10%
+  MAYBE: 0.15, // 15%
+  TRUE:  0.25  // 25%
 });
 
 // class method
-value1.and(value2).asHash()
+value1.and(value2).asValues()
 // polymorphic function
-and(value1, value2).asHash()
+and(value1, value2).asValues()
 // => {
-//   _undef: 0.16666666666666669, // ~17%
-//   _false: 0.25,                //  25% — dominating category
-//   _never: 0.20833333333333334, // ~21%
-//   _maybe: 0.20833333333333334, // ~21%
-//   _true:  0.16666666666666669  // ~17%
+//   UNDEF: 0.16666666666666669, // ~17%
+//   FALSE: 0.25,                //  25% — dominating category
+//   NEVER: 0.20833333333333334, // ~21%
+//   MAYBE: 0.20833333333333334, // ~21%
+//   TRUE:  0.16666666666666669  // ~17%
 // }
 ```
 
@@ -240,15 +246,15 @@ and(value1, value2).asHash()
 
 ```JavaScript
 // class method
-value1.or(value2).asHash()
+value1.or(value2).asValues()
 // polymorphic function
-or(value1, value2).asHash()
+or(value1, value2).asValues()
 // => {
-//   _undef: 0.18181818181818182, // ~18%
-//   _false: 0.09090909090909091, //  ~9%
-//   _never: 0.22727272727272727, // ~23%
-//   _maybe: 0.2727272727272727,  // ~27% — dominating category
-//   _true:  0.22727272727272727  // ~23%
+//   UNDEF: 0.18181818181818182, // ~18%
+//   FALSE: 0.09090909090909091, //  ~9%
+//   NEVER: 0.22727272727272727, // ~23%
+//   MAYBE: 0.2727272727272727,  // ~27% — dominating category
+//   TRUE:  0.22727272727272727  // ~23%
 // }
 ```
 
@@ -267,21 +273,21 @@ const sum: Logic = new Logic();
 for (let index = 0; index < values.length; index += 1) {
   sum.add(values[index]);
 }
-sum.asHash()
+sum.asValues()
 // => {
-//   _undef: 0.75,
-//   _false: 0.85,
-//   _never: 0.95,
-//   _maybe: 0.8,
-//   _true:  0.65
+//   UNDEF: 0.75,
+//   FALSE: 0.85,
+//   NEVER: 0.95,
+//   MAYBE: 0.8,
+//   TRUE:  0.65
 // }
-sum.normalize().asHash()
+sum.normalize().asValues()
 // => {
-//   _undef: 0.1875, // 18.75%
-//   _false: 0.2125, // 21.25%
-//   _never: 0.2375, // 23.75%
-//   _maybe: 0.2,    // 20.00%
-//   _true:  0.1625  // 16.25%
+//   UNDEF: 0.1875, // 18.75%
+//   FALSE: 0.2125, // 21.25%
+//   NEVER: 0.2375, // 23.75%
+//   MAYBE: 0.2,    // 20.00%
+//   TRUE:  0.1625  // 16.25%
 // }
 ```
 
