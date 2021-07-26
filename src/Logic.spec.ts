@@ -2,13 +2,13 @@ import { Logic, normalize as lNormalize, not as lNot, and as lAnd, or as lOr } f
 import { Fuzzy, FUZZY_TRUE, FUZZY_FALSE } from './Fuzzy';
 import { Category, Categories, not, and, or, UNDEF, FALSE, NEVER, MAYBE, TRUE } from './Category';
 
-const testStep: Fuzzy[] = [
-  (FUZZY_TRUE - FUZZY_FALSE) / 2.1,
-  (FUZZY_TRUE - FUZZY_FALSE) / 2.2,
-  (FUZZY_TRUE - FUZZY_FALSE) / 2.3,
-  (FUZZY_TRUE - FUZZY_FALSE) / 2.4,
-  (FUZZY_TRUE - FUZZY_FALSE) / 2.5
-];
+const testStep: Record<Category, Fuzzy> = {
+  UNDEF: (FUZZY_TRUE - FUZZY_FALSE) / 2.1,
+  FALSE: (FUZZY_TRUE - FUZZY_FALSE) / 2.2,
+  NEVER: (FUZZY_TRUE - FUZZY_FALSE) / 2.3,
+  MAYBE: (FUZZY_TRUE - FUZZY_FALSE) / 2.4,
+  TRUE: (FUZZY_TRUE - FUZZY_FALSE) / 2.5
+};
 
 describe('Common Sense', (): void => {
   describe('constructors', (): void => {
