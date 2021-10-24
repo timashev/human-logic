@@ -49,7 +49,7 @@ Node v6+ syntax:
 ```JavaScript
 const {
   // Discrete Common Sense Logic
-  Category, Categories, UNDEF, FALSE, NEVER, MAYBE, TRUE,
+  Categories, UNDEF, FALSE, NEVER, MAYBE, TRUE,
   // Fuzzy Common Sense Logic
   Logic,
   // Polymorphic Functions
@@ -64,7 +64,7 @@ ES5+ syntax:
 ```JavaScript
 import {
   // Discrete Common Sense Logic
-  Category, Categories, UNDEF, FALSE, NEVER, MAYBE, TRUE,
+  Categories, UNDEF, FALSE, NEVER, MAYBE, TRUE,
   // Fuzzy Common Sense Logic
   Logic,
   // Polymorphic Functions
@@ -326,7 +326,7 @@ normalize(0.64)
 
 ```JavaScript
 // Discrete Common Sense Logic only
-import { Category, Categories, not, and, or, UNDEF, FALSE, NEVER, MAYBE, TRUE } from 'human-logic/dist/Category';
+import { Categories, not, and, or, UNDEF, FALSE, NEVER, MAYBE, TRUE } from 'human-logic/dist/Category';
 ```
 
 ```JavaScript
