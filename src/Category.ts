@@ -42,7 +42,7 @@ export const Categories = [UNDEF, FALSE, NEVER, MAYBE, TRUE] as const;
  * * `MAYBE` – Uncertain (could be either positive or negative)
  * * `TRUE` – Certainly positive
  */
-export type Category = typeof Categories[number];
+export type Category = 'UNDEF' | 'FALSE' | 'NEVER' | 'MAYBE' | 'TRUE';
 
 /**
  * Discrete Logical NOT:

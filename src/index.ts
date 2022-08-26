@@ -67,7 +67,7 @@ export function or(a: Category | Fuzzy | Logic, b: Category | Fuzzy | Logic): Ca
  *
  * @return For `Fuzzy` value lesser than `0.0` returns `0.0`,
  * for `Fuzzy` value greater then `1.0` returns `1.0`, otherwise returns original `Fuzzy` value.
- * See [[Logic]] for details on Fuzzy Human Logic values normalization.
+ * See {@link Logic} for details on Fuzzy Human Logic values normalization.
  */
 export function normalize(value: Fuzzy): Fuzzy;
 export function normalize(value: Logic): Logic;

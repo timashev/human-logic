@@ -1,6 +1,0 @@
-[
-  {
-    "pattern": "^",
-    "replace": "https://github.com/timashev/human-logic/tree/master/src/"
-  }
-]

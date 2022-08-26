@@ -20,7 +20,7 @@ import { Fuzzy, not as fNot, and as fAnd, or as fOr, FUZZY_FALSE, FUZZY_TRUE } f
 import { Category, UNDEF, FALSE, NEVER, MAYBE, TRUE } from './Category';
 
 /**
- * Object-like hash to provide and receive Fuzzy Common Sense logical values where [[Category]]
+ * Object-like hash to provide and receive Fuzzy Common Sense logical values where {@link Category}
  * values are used as keys.
  */
 export interface LogicValues {
@@ -38,7 +38,7 @@ export class Logic {
   private values: LogicValues;
 
   /**
-   * Basic constructor. See [[fromCategory]], [[fromArray]] and [[fromValues]]
+   * Basic constructor. See {@link fromCategory}, {@link fromArray} and {@link fromValues}
    * for more convenient instantiation methods.
    */
   public constructor(_undef?: Fuzzy, _false?: Fuzzy, _never?: Fuzzy, _maybe?: Fuzzy, _true?: Fuzzy) {
@@ -52,8 +52,8 @@ export class Logic {
   }
 
   /**
-   * Creates new [[Logic]] instance with [[FUZZY_TRUE]] value for the specified `category`
-   * (and [[FUZZY_FALSE]] for all other categories).
+   * Creates new {@link Logic} instance with {@link Fuzzy.FUZZY_TRUE} value for the specified `category`
+   * (and {@link Fuzzy.FUZZY_FALSE} for all other categories).
    */
   public static fromCategory(category: Category): Logic {
     return new Logic(
@@ -66,23 +66,25 @@ export class Logic {
   }
 
   /**
-   * Creates new [[Logic]] instance from array of [[Fuzzy]] values.
-   * @param fuzzy The categories order in array is: [[UNDEF]], [[FALSE]], [[NEVER]], [[MAYBE]], [[TRUE]].
+   * Creates new {@link Logic} instance from array of {@link Fuzzy} values.
+   * @param fuzzy The categories order in array is: {@link Category.UNDEF}, {@link Category.FALSE},
+   * {@link Category.NEVER}, {@link Category.MAYBE}, {@link Category.TRUE}.
    */
   public static fromArray(fuzzy: Fuzzy[]): Logic {
     return new Logic(fuzzy[0], fuzzy[1], fuzzy[2], fuzzy[3], fuzzy[4]);
   }
 
   /**
-   * Creates new [[Logic]] instance from [[LogicValues]].
+   * Creates new {@link Logic} instance from {@link LogicValues}.
    */
   public static fromValues(fuzzy: LogicValues): Logic {
     return new Logic(fuzzy.UNDEF, fuzzy.FALSE, fuzzy.NEVER, fuzzy.MAYBE, fuzzy.TRUE);
   }
 
   /**
-   * Retrieves an array of [[Fuzzy]] values.
-   * @return The categories order in array is: [[UNDEF]], [[FALSE]], [[NEVER]], [[MAYBE]], [[TRUE]].
+   * Retrieves an array of {@link Fuzzy} values.
+   * @return The categories order in array is: {@link Category.UNDEF}, {@link Category.FALSE},
+   * {@link Category.NEVER}, {@link Category.MAYBE}, {@link Category.TRUE}.
    */
   public asArray(): Fuzzy[] {
     return [
@@ -95,8 +97,8 @@ export class Logic {
   }
 
   /**
-   * Dominating [[Category]] or `undefined` if none of the categories
-   * has a value greater than [[FUZZY_FALSE]].
+   * Dominating {@link Category} or `undefined` if none of the categories
+   * has a value greater than {@link Fuzzy.FUZZY_FALSE}.
    */
   public asCategory(): Category | undefined {
     let result: Category = UNDEF;
@@ -108,8 +110,8 @@ export class Logic {
   }
 
   /**
-   * Retrieves a copy of [[LogicValues]].
-   * @return A clone, a new instance of [[LogicValues]] created from the values kept internally.
+   * Retrieves a copy of {@link LogicValues}.
+   * @return A clone, a new instance of {@link LogicValues} created from the values kept internally.
    */
   public asValues(): LogicValues {
     return { ...this.values };
@@ -133,8 +135,9 @@ export class Logic {
   }
 
   /**
-   * String representation of five-dimensional vector of [[Fuzzy]] values.
-   * The categories order is: [[UNDEF]], [[FALSE]], [[NEVER]], [[MAYBE]], [[TRUE]].
+   * String representation of five-dimensional vector of {@link Fuzzy} values.
+   * The categories order is: {@link Category.UNDEF}, {@link Category.FALSE}, {@link Category.NEVER},
+   * {@link Category.MAYBE}, {@link Category.TRUE}.
    */
   public toString(): string {
     return `(${this.asArray()
@@ -143,7 +146,7 @@ export class Logic {
   }
 
   /**
-   * Returns [[Fuzzy]] value of the specified category of this [[Logic]] object.
+   * Returns {@link Fuzzy} value of the specified category of this {@link Logic} object.
    */
   public get(category: Category): Fuzzy {
     return this.values[category];
@@ -160,18 +163,19 @@ export class Logic {
   }
 
   /**
-   * Returns normalized [[Fuzzy]] value for the specified category. See [[normalize]] for details.
+   * Returns normalized {@link Fuzzy} value for the specified category. See {@link normalize} for details.
    */
   public getNormalized(category: Category): Fuzzy {
     return this.values[category] / this.normalizer();
   }
 
   /**
-   * If original values are not normalized, returns new Logic object with normalized [[Logic]] value,
+   * If original values are not normalized, returns new Logic object with normalized {@link Logic} value,
    * otherwise return the same object.
    *
-   * The [[Logic]] value is normalized if and only if the sum of [[Fuzzy]] values of all categories
-   * equals to `1.0` (or `0.0` if there are no categories with [[Fuzzy]] value greater than [[FUZZY_FALSE]]).
+   * The {@link Logic} value is normalized if and only if the sum of {@link Fuzzy} values of all categories
+   * equals to `1.0` (or `0.0` if there are no categories with {@link Fuzzy} value greater than
+   * {@link Fuzzy.FUZZY_FALSE}).
    */
   public normalize(): Logic {
     const normalizer = this.normalizer();
@@ -179,7 +183,7 @@ export class Logic {
   }
 
   /**
-   * Checks that at least one of the categories has non-zero [[Fuzzy]] value.
+   * Checks that at least one of the categories has non-zero {@link Fuzzy} value.
    */
   public isValid(): boolean {
     return this.scalar() > FUZZY_FALSE;
@@ -399,7 +403,7 @@ export function or(a: Logic, b: Logic): Logic {
  * const valueA = value.normalize();
  * const valueB = normalize(value);
  * ```
- * See [[Logic.normalize]] for details.
+ * See {@link Logic.normalize} for details.
  */
 export function normalize(value: Logic): Logic {
   if (value && value instanceof Logic) return value.normalize();

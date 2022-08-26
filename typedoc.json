@@ -4,6 +4,9 @@
   "excludePrivate": true,
   "excludeProtected": true,
   "excludeExternals": true,
+  "githubPages": false,
+  "entryPointStrategy": "expand",
+  "categorizeByGroup": false,
+  "gitRevision": "master",
   "exclude": "**/*+(.spec).ts"
 }
-
