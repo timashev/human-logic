@@ -6,7 +6,6 @@
   "excludeExternals": true,
   "githubPages": false,
   "entryPointStrategy": "expand",
-  "categorizeByGroup": false,
   "gitRevision": "master",
-  "exclude": "**/*+(.spec).ts"
+  "exclude": ["**/*+(.spec).ts"]
 }
