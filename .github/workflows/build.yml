@@ -29,6 +29,9 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn all
 
+      - name: README.md and tex/ are up to date with README.tex.md
+        run: yarn readme && test -z "$(git status --porcelain -- README.md tex)"
+
       - name: Coveralls
         if: matrix.node-version == '24.x'
         uses: coverallsapp/github-action@v2

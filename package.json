@@ -14,6 +14,7 @@
     "lint": "eslint src",
     "build": "tsc -p tsconfig-dist.json",
     "docs": "typedoc src",
+    "readme": "node scripts/readme.mjs",
     "prepublishOnly": "yarn lint && yarn test",
     "prepare": "yarn build"
   },
@@ -54,6 +55,7 @@
     "eslint-plugin-prettier": "^5.5.6",
     "globals": "^17.13.0",
     "jest": "^30.5.2",
+    "mathjax": "^4.1.3",
     "prettier": "^3.9.10",
     "typedoc": "^0.28.20",
     "typescript": "^6.0.3",

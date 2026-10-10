@@ -1,3 +1,5 @@
+<!-- Generated from README.tex.md by `yarn readme`. Edit README.tex.md instead. -->
+
 # Human Logic or Common Sense
 
 [![Build Status](https://github.com/timashev/human-logic/actions/workflows/build.yml/badge.svg)](https://github.com/timashev/human-logic/actions/workflows/build.yml) [![Coverage Status](https://coveralls.io/repos/github/timashev/human-logic/badge.svg?branch=master)](https://coveralls.io/github/timashev/human-logic?branch=master) [![NPM version](https://img.shields.io/npm/v/human-logic.svg)](https://www.npmjs.com/package/human-logic) [![License](https://img.shields.io/github/license/timashev/human-logic.svg)](https://github.com/timashev/human-logic/blob/master/LICENSE)
@@ -121,13 +123,13 @@ Categories
 
 ### Math Background
 
-<p align="center"><img src="/tex/ae77f2859802a1f32c296751f4b4592e.svg?invert_in_darkmode&sanitize=true" align=middle width=156.84716025pt height=118.35736770000001pt/></p>
+<p align="center"><img src="/tex/260034171064710f25b99cfa34e2cd3f.svg" alt="\operatorname{!}a = \begin{cases} \texttt{undef} = a_\texttt{undef} \\ \texttt{false} = a_\texttt{true} \\ \texttt{never} = a_\texttt{maybe} \\ \texttt{maybe} = a_\texttt{never} \\ \texttt{true} = a_\texttt{false} \\ \end{cases}" align="middle"/></p>
 
-<p align="center"><img src="/tex/8071c1b11bf036f245308cc614c56f84.svg?invert_in_darkmode&sanitize=true" align=middle width=610.5136719pt height=128.22048195pt/></p>
+<p align="center"><img src="/tex/02ffded4b9e1b9c4d0f8a2db81b11f53.svg" alt="a \operatorname{\&amp;} b = \begin{cases} \texttt{undef} = a_\texttt{undef} \operatorname{|} b_\texttt{undef} \\ \texttt{false} = \operatorname{!} a_\texttt{undef} \operatorname{\&amp;} \operatorname{!}b_\texttt{undef} \operatorname{\&amp;} \Big(a_\texttt{false} \operatorname{|} b_\texttt{false} \operatorname{|} (a_\texttt{never} \operatorname{\&amp;} b_\texttt{maybe}) | (a_\texttt{maybe} \operatorname{\&amp;} b_\texttt{never})\Big) \\ \texttt{never} = \operatorname{!} a_\texttt{undef} \operatorname{\&amp;} \operatorname{!}b_\texttt{undef} \operatorname{\&amp;} \Big((a_\texttt{never} \operatorname{\&amp;} b_\texttt{never}) | (a_\texttt{never} \operatorname{\&amp;} b_\texttt{true}) | (a_\texttt{true} \operatorname{\&amp;} b_\texttt{never})\Big) \\ \texttt{maybe} = \operatorname{!} a_\texttt{undef} \operatorname{\&amp;} \operatorname{!}b_\texttt{undef} \operatorname{\&amp;} \Big((a_\texttt{maybe} \operatorname{\&amp;} b_\texttt{maybe}) | (a_\texttt{maybe} \operatorname{\&amp;} b_\texttt{true}) | (a_\texttt{true} \operatorname{\&amp;} b_\texttt{maybe})\Big) \\ \texttt{true} = \operatorname{!} a_\texttt{undef} \operatorname{\&amp;} \operatorname{!}b_\texttt{undef} \operatorname{\&amp;} a_\texttt{true} \operatorname{\&amp;} b_\texttt{true} \\ \end{cases}" align="middle"/></p>
 
-<p align="center"><img src="/tex/2953f9691864e91672ac7dd328a9f2a0.svg?invert_in_darkmode&sanitize=true" align=middle width=614.52064575pt height=132.16535804999998pt/></p>
+<p align="center"><img src="/tex/1ccfc1de0fd5bb5775e1b79678e73887.svg" alt="a \operatorname{|} b = \begin{cases} \texttt{undef} = a_\texttt{undef} \operatorname{|} b_\texttt{undef} \\ \texttt{false} = \operatorname{!} a_\texttt{undef} \operatorname{\&amp;} \operatorname{!}b_\texttt{undef} \operatorname{\&amp;} a_\texttt{false} \operatorname{\&amp;} b_\texttt{false} \\ \texttt{never} = \operatorname{!} a_\texttt{undef} \operatorname{\&amp;} \operatorname{!}b_\texttt{undef} \operatorname{\&amp;} \Big((a_\texttt{never} \operatorname{\&amp;} b_\texttt{never}) | (a_\texttt{never} \operatorname{\&amp;} b_\texttt{false}) | (a_\texttt{false} \operatorname{\&amp;} b_\texttt{never})\Big) \\ \texttt{maybe} = \operatorname{!} a_\texttt{undef} \operatorname{\&amp;} \operatorname{!}b_\texttt{undef} \operatorname{\&amp;} \Big((a_\texttt{maybe} \operatorname{\&amp;} b_\texttt{maybe}) | (a_\texttt{maybe} \operatorname{\&amp;} b_\texttt{false}) | (a_\texttt{false} \operatorname{\&amp;} b_\texttt{maybe})\Big) \\ \texttt{true} = \operatorname{!} a_\texttt{undef} \operatorname{\&amp;} \operatorname{!}b_\texttt{undef} \operatorname{\&amp;} \Big(a_\texttt{true} \operatorname{|} b_\texttt{true} \operatorname{|} (a_\texttt{never} \operatorname{\&amp;} b_\texttt{maybe}) | (a_\texttt{maybe} \operatorname{\&amp;} b_\texttt{never})\Big) \\ \end{cases}" align="middle"/></p>
 
-where "<img src="/tex/1bf49790e3d1ca92411e3e1573a7d714.svg?invert_in_darkmode&sanitize=true" align=middle width=4.5662248499999905pt height=22.831056599999986pt/>", "<img src="/tex/e7538fc23e29821ea54565f5d88aef0d.svg?invert_in_darkmode&sanitize=true" align=middle width=12.785434199999989pt height=22.831056599999986pt/>" and "<img src="/tex/97b1f92923118406f3fbbf144ddf5198.svg?invert_in_darkmode&sanitize=true" align=middle width=4.5662248499999905pt height=24.65753399999998pt/>" are [classical fuzzy logic](#classical-fuzzy-logic) operations.
+where "<img src="/tex/63d2ef8f92af259a0cddeccb11ebcd13.svg" alt="\operatorname{!}" align="middle"/>", "<img src="/tex/c571d0d66b729b985defd9c4c5a54603.svg" alt="\operatorname{\&amp;}" align="middle"/>" and "<img src="/tex/d865c87b8f018a22896f9b516fda9be1.svg" alt="\operatorname{|}" align="middle"/>" are [classical fuzzy logic](#classical-fuzzy-logic) operations.
 
 ### Initialization
 
@@ -160,8 +162,6 @@ value.ne(MAYBE) // Not equal to category
 const value = Logic.fromCategory(MAYBE);
 value.asArray()
 // => [0.0, 0.0, 0.0, 1.0, 0.0]
-value.asValues()
-// => { UNDEF: 0.0, FALSE: 0.0, NEVER: 0.0, MAYBE: 1.0, TRUE: 0.0 }
 value.asValues()
 // => { [UNDEF]: 0.0, [FALSE]: 0.0, [NEVER]: 0.0, [MAYBE]: 1.0, [TRUE]: 0.0 }
 
@@ -295,11 +295,11 @@ sum.normalize().asValues()
 
 #### Math Background
 
-<p align="center"><img src="/tex/9e8c19a3a784ae46cee13231f97d815b.svg?invert_in_darkmode&sanitize=true" align=middle width=87.6976551pt height=12.785402849999999pt/></p>
+<p align="center"><img src="/tex/9c8cb9933eecd053794a9040a5c48b2e.svg" alt="\operatorname{!}a = 1.0 - a" align="middle"/></p>
 
-<p align="center"><img src="/tex/acd51acdfd66438da15a21dcec5e3318.svg?invert_in_darkmode&sanitize=true" align=middle width=119.1589377pt height=16.438356pt/></p>
+<p align="center"><img src="/tex/763b86d9e21b7c5fbfa748f17c57bb60.svg" alt="a \operatorname{\&amp;} b = \operatorname{min}(a, b)" align="middle"/></p>
 
-<p align="center"><img src="/tex/9e0fe191cf439b1f56325ef74b4afbd7.svg?invert_in_darkmode&sanitize=true" align=middle width=114.13610339999998pt height=16.438356pt/></p>
+<p align="center"><img src="/tex/37788eb53b20cdd6e0d1f4428802cdc4.svg" alt="a \operatorname{|} b = \operatorname{max}(a, b)" align="middle"/></p>
 
 #### Usage
 

@@ -1498,6 +1498,11 @@
   resolved "https://registry.yarnpkg.com/@keyv/serialize/-/serialize-1.1.1.tgz#0c01dd3a3483882af7cf3878d4e71d505c81fc4a"
   integrity sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==
 
+"@mathjax/mathjax-newcm-font@^4.1.3":
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/@mathjax/mathjax-newcm-font/-/mathjax-newcm-font-4.1.3.tgz#cb107f923c22962f627d90fab2b01c532fd2d8db"
+  integrity sha512-gzAB3dFHilHX1l5x2xUqRL+1jDQt3Fyza1DkEMVXWC4E8SvsGdlgEza47HYi2WhVcgfkvf4zgUGzuhbq3Pjlew==
+
 "@napi-rs/wasm-runtime@^1.1.4":
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/@napi-rs/wasm-runtime/-/wasm-runtime-1.2.5.tgz#8c728c07e2543d80e55ccb34158c4ae9d6bd13e8"
@@ -3304,6 +3309,13 @@ markdown-it@^14.3.0:
     mdurl "^2.0.0"
     punycode.js "^2.3.1"
     uc.micro "^2.1.0"
+
+mathjax@^4.1.3:
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/mathjax/-/mathjax-4.1.3.tgz#00975837f93b879aad55ca8afa1c9f902451df56"
+  integrity sha512-BN/8Pkgn7G1pIDYJqd9md+JHsE/jydSYbyOZnSdSA0WziuVO8mRxdYiWFumkVVly/8U+hm9DpIIoWuvySverzw==
+  dependencies:
+    "@mathjax/mathjax-newcm-font" "^4.1.3"
 
 mdurl@^2.0.0:
   version "2.1.0"
