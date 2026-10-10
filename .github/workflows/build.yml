@@ -2,27 +2,35 @@ name: build
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
+
+permissions:
+  contents: read
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: ['22.x', '24.x']
+
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14.x'
-        cache: 'yarn'
-    - run: yarn install
-    - run: yarn all
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
 
-    - name: Coveralls
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: yarn install --frozen-lockfile
+      - run: yarn all
+
+      - name: Coveralls
+        if: matrix.node-version == '24.x'
+        uses: coverallsapp/github-action@v2
+        with:
+          file: coverage/lcov.info

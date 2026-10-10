@@ -190,7 +190,7 @@ export class Logic {
   }
 
   /**
-   * Fuzzy Common Sense Logical NOT. See [README](../index.html#fuzzy-common-sense-logic) for details.
+   * Fuzzy Common Sense Logical NOT. See [README](../README.md#fuzzy-common-sense-logic) for details.
    */
   public not(): Logic {
     return new Logic(
@@ -208,9 +208,9 @@ export class Logic {
   }
 
   /**
-   * Fuzzy Common Sense Logical AND. See [README](../index.html#fuzzy-common-sense-logic) for details.
+   * Fuzzy Common Sense Logical AND. See [README](../README.md#fuzzy-common-sense-logic) for details.
    */
-  public and(value: Logic): Logic {
+  public and(value?: Logic): Logic {
     if (!value || !(value instanceof Logic)) throw new TypeError('Invalid argument type');
     const values = value.getValues();
     const undef = fOr(this.values[UNDEF], values[UNDEF]);
@@ -252,9 +252,9 @@ export class Logic {
   }
 
   /**
-   * Fuzzy Common Sense Logical OR. See [README](../index.html#fuzzy-common-sense-logic) for details.
+   * Fuzzy Common Sense Logical OR. See [README](../README.md#fuzzy-common-sense-logic) for details.
    */
-  public or(value: Logic): Logic {
+  public or(value?: Logic): Logic {
     if (!value || !(value instanceof Logic)) throw new TypeError('Invalid argument type');
     const values = value.getValues();
     const undef = fOr(this.values[UNDEF], values[UNDEF]);
@@ -301,7 +301,7 @@ export class Logic {
    * Mutates the current object.
    * @return Mutated `this` object.
    */
-  public add(value: Logic): Logic {
+  public add(value?: Logic): Logic {
     if (!value || !(value instanceof Logic)) throw new TypeError('Invalid argument type');
     const values = value.getValues();
     this.values[UNDEF] += values[UNDEF];
@@ -361,9 +361,9 @@ export class Logic {
  * const valueA = value.not();
  * const valueB = not(value);
  * ```
- * See [README](../index.html#fuzzy-common-sense-logic) for details.
+ * See [README](../README.md#fuzzy-common-sense-logic) for details.
  */
-export function not(value: Logic): Logic {
+export function not(value?: Logic): Logic {
   if (value && value instanceof Logic) return value.not();
   throw new TypeError('Invalid argument type');
 }
@@ -375,9 +375,9 @@ export function not(value: Logic): Logic {
  * const valueA = value1.and(value2);
  * const valueB = and(value1, value2);
  * ```
- * See [README](../index.html#fuzzy-common-sense-logic) for details.
+ * See [README](../README.md#fuzzy-common-sense-logic) for details.
  */
-export function and(a: Logic, b: Logic): Logic {
+export function and(a?: Logic, b?: Logic): Logic {
   if (a && a instanceof Logic) return a.and(b);
   throw new TypeError('Invalid argument type');
 }
@@ -389,9 +389,9 @@ export function and(a: Logic, b: Logic): Logic {
  * const valueA = value1.or(value2);
  * const valueB = or(value1, value2);
  * ```
- * See [README](../index.html#fuzzy-common-sense-logic) for details.
+ * See [README](../README.md#fuzzy-common-sense-logic) for details.
  */
-export function or(a: Logic, b: Logic): Logic {
+export function or(a?: Logic, b?: Logic): Logic {
   if (a && a instanceof Logic) return a.or(b);
   throw new TypeError('Invalid argument type');
 }
@@ -405,7 +405,7 @@ export function or(a: Logic, b: Logic): Logic {
  * ```
  * See {@link Logic.normalize} for details.
  */
-export function normalize(value: Logic): Logic {
+export function normalize(value?: Logic): Logic {
   if (value && value instanceof Logic) return value.normalize();
   throw new TypeError('Invalid argument type');
 }

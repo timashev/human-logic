@@ -1,8 +1,6 @@
 {
   "extends": "./tsconfig-base",
   "compilerOptions": {
-    "declarationDir": "./dist",
-    "module": "es2015",
-    "target": "es2015"
+    "declarationDir": "./dist"
   }
 }

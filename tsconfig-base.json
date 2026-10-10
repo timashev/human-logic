@@ -6,7 +6,6 @@
     "experimentalDecorators": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "moduleResolution": "node",
     "strictNullChecks": true,
     "esModuleInterop": true,
     "noUnusedLocals": true,
@@ -19,8 +18,9 @@
     "strict": true,
     "pretty": true,
     "sourceMap": true,
+    "module": "nodenext",
+    "target": "es2015"
   },
-  "typeRoots": ["node_modules/@types"],
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "src/**/*.test.*", "src/**/*.spec.*"]
 }
