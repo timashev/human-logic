@@ -1,3 +1,4 @@
+import { describe, test, expect } from '@jest/globals';
 import { Logic, normalize as lNormalize, not as lNot, and as lAnd, or as lOr } from './Logic';
 import { Fuzzy, FUZZY_TRUE, FUZZY_FALSE } from './Fuzzy';
 import { Category, Categories, not, and, or, UNDEF, FALSE, NEVER, MAYBE, TRUE } from './Category';

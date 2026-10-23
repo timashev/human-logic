@@ -1,3 +1,4 @@
+import { describe, test, expect } from '@jest/globals';
 import { Categories, not, and, or, UNDEF, FALSE, NEVER, MAYBE, TRUE } from './Category';
 
 describe('Categorical NOT', (): void => {

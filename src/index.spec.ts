@@ -1,3 +1,4 @@
+import { describe, test, expect } from '@jest/globals';
 import {
   Category,
   Categories,
@@ -26,16 +27,16 @@ describe('Polymorphic Functions', (): void => {
         expect(not(value)).toBe(dNot(value));
       });
       test(`${value} and undefined`, (): void => {
-        expect((): Category => and(value, undefined)).toThrow(TypeError);
+        expect((): Category => and(value, undefined as unknown as Category)).toThrow(TypeError);
       });
       test(`undefined and ${value}`, (): void => {
-        expect((): Category => and(undefined, value)).toThrow(TypeError);
+        expect((): Category => and(undefined as unknown as Category, value)).toThrow(TypeError);
       });
       test(`${value} or undefined`, (): void => {
-        expect((): Category => or(value, undefined)).toThrow(TypeError);
+        expect((): Category => or(value, undefined as unknown as Category)).toThrow(TypeError);
       });
       test(`undefined or ${value}`, (): void => {
-        expect((): Category => or(undefined, value)).toThrow(TypeError);
+        expect((): Category => or(undefined as unknown as Category, value)).toThrow(TypeError);
       });
       Categories.forEach((value2): void => {
         test(`${value} and ${value2}`, (): void => {
@@ -110,28 +111,36 @@ describe('Polymorphic Functions', (): void => {
 
   describe('Invalid arguments', (): void => {
     test(`normalize undefined`, (): void => {
-      expect((): Fuzzy | Logic => normalize(undefined)).toThrow(TypeError);
+      expect((): Fuzzy | Logic => normalize(undefined as unknown as number)).toThrow(TypeError);
     });
     test(`normalize null`, (): void => {
-      expect((): Fuzzy | Logic => normalize(null)).toThrow(TypeError);
+      expect((): Fuzzy | Logic => normalize(null as unknown as number)).toThrow(TypeError);
     });
     test(`not undefined`, (): void => {
-      expect((): Category | Fuzzy | Logic => not(undefined)).toThrow(TypeError);
+      expect((): Category | Fuzzy | Logic => not(undefined as unknown as number)).toThrow(TypeError);
     });
     test(`not null`, (): void => {
-      expect((): Category | Fuzzy | Logic => not(null)).toThrow(TypeError);
+      expect((): Category | Fuzzy | Logic => not(null as unknown as number)).toThrow(TypeError);
     });
     test(`undefined and null`, (): void => {
-      expect((): Category | Fuzzy | Logic => and(undefined, null)).toThrow(TypeError);
+      expect((): Category | Fuzzy | Logic =>
+        and(undefined as unknown as number, null as unknown as number)
+      ).toThrow(TypeError);
     });
     test(`null and undefined`, (): void => {
-      expect((): Category | Fuzzy | Logic => and(null, undefined)).toThrow(TypeError);
+      expect((): Category | Fuzzy | Logic =>
+        and(null as unknown as number, undefined as unknown as number)
+      ).toThrow(TypeError);
     });
     test(`undefined or null`, (): void => {
-      expect((): Category | Fuzzy | Logic => or(undefined, null)).toThrow(TypeError);
+      expect((): Category | Fuzzy | Logic =>
+        or(undefined as unknown as number, null as unknown as number)
+      ).toThrow(TypeError);
     });
     test(`null or undefined`, (): void => {
-      expect((): Category | Fuzzy | Logic => or(null, undefined)).toThrow(TypeError);
+      expect((): Category | Fuzzy | Logic =>
+        or(null as unknown as number, undefined as unknown as number)
+      ).toThrow(TypeError);
     });
   });
 });
